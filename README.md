@@ -16,7 +16,7 @@ Add the following entries to your `/etc/hosts` file:
 10.42.0.12 app2.example.com
 ```
 
-Run `vagrant up --provider=libvirt` (or `--provider=virtualbox`) to launch everything.
+Run `vagrant up --provider=libvirt` to launch everything.
 
 Show the statistics from within the machine:
 

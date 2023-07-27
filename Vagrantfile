@@ -12,11 +12,6 @@ Vagrant.configure('2') do |config|
     lv.keymap = 'pt'
     config.vm.synced_folder '.', '/vagrant', type: 'nfs'
   end
-  config.vm.provider :virtualbox do |vb|
-    vb.linked_clone = true
-    vb.memory = 256
-    vb.cpus = 4
-  end
   config.vm.define 'lb' do |config|
     config.vm.hostname = 'lb.example.com'
     config.vm.network :private_network, ip: '10.42.0.10', libvirt__forward_mode: 'none', libvirt__dhcp_enabled: false
