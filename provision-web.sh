@@ -32,11 +32,8 @@ install -d -o root -g app -m 750 /opt/app
 # install the example application and run it as a systemd service.
 install /vagrant/app/* /opt/app
 
-# launch two apps: app1 (port 3100 and 3101) and app2 (port 3200 and 3201).
-for n in 1 2; do
-    port="3${n}00"
-    healthz_port="3${n}01"
-    cat >/etc/systemd/system/app$n.service <<EOF
+# launch the app.
+cat >/etc/systemd/system/app.service <<'EOF'
 [Unit]
 Description=Example Web Application
 After=network.target
@@ -46,18 +43,16 @@ Type=simple
 User=app
 Group=app
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/node main.js $port $healthz_port
+ExecStart=/usr/bin/node main.js 3100 3101
 WorkingDirectory=/opt/app
 Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target
 EOF
-    systemctl enable app$n
-    systemctl start app$n
-done
+systemctl enable app
+systemctl start app
 
 # try it.
 sleep .2
 wget -qO- localhost:3100/try
-wget -qO- localhost:3200/try

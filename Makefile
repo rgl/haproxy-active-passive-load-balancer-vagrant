@@ -1,7 +1,7 @@
 all: architecture.png
 
 architecture.png: architecture.uxf
-	java -jar ~/Applications/Umlet/umlet.jar \
+	umlet \
 		-action=convert \
 		-format=png \
 		-filename=$< \

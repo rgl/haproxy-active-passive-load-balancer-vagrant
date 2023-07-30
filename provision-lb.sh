@@ -85,27 +85,16 @@ listen stats
   stats enable
   stats uri /
 
-listen app1
-  bind 10.42.0.11:80 name app1
+listen app
+  bind 10.42.0.11:80 name app
   stick-table type ip size 1 nopurge
   stick on dst
   option httpchk
   http-check connect port 3101
-  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app1.example.com
+  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app.example.com
   http-check expect status 200
   server web1 10.42.0.21:3100 check inter 5s
   server web2 10.42.0.22:3100 check inter 5s backup
-
-listen app2
-  bind 10.42.0.12:80 name app2
-  stick-table type ip size 1 nopurge
-  stick on dst
-  option httpchk
-  http-check connect port 3201
-  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app2.example.com
-  http-check expect status 200
-  server web1 10.42.0.21:3200 check inter 5s
-  server web2 10.42.0.22:3200 check inter 5s backup
 EOF
 systemctl restart haproxy
 

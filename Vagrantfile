@@ -16,9 +16,7 @@ Vagrant.configure('2') do |config|
     config.vm.hostname = 'lb.example.com'
     config.vm.network :private_network, ip: '10.42.0.10', libvirt__forward_mode: 'none', libvirt__dhcp_enabled: false
     config.vm.network :private_network, ip: '10.42.0.11', libvirt__forward_mode: 'none', libvirt__dhcp_enabled: false
-    config.vm.network :private_network, ip: '10.42.0.12', libvirt__forward_mode: 'none', libvirt__dhcp_enabled: false
-    config.vm.provision :shell, path: 'provision-certificate.sh', args: ['app1.example.com', '10.42.0.11']
-    config.vm.provision :shell, path: 'provision-certificate.sh', args: ['app2.example.com', '10.42.0.12']
+    config.vm.provision :shell, path: 'provision-certificate.sh', args: ['app.example.com', '10.42.0.11']
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-lb.sh'
   end

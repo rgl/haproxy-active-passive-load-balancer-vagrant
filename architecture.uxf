@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="15.1">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>340</x>
-      <y>100</y>
+      <y>140</y>
       <w>220</w>
-      <h>360</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
 &lt;&lt;haproxy&gt;&gt;
@@ -18,85 +18,54 @@
     <id>UMLClass</id>
     <coordinates>
       <x>780</x>
-      <y>150</y>
+      <y>140</y>
       <w>250</w>
-      <h>130</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
-name=web1
-ip_address=10.42.0.21</panel_attributes>
+web1
+10.42.0.21
+app.example.com</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>180</y>
-      <w>200</w>
+      <x>260</x>
+      <y>240</y>
+      <w>120</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
-r1=10.42.0.11:80</panel_attributes>
-    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>220</y>
-      <w>130</w>
-      <h>200</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;180.0;90.0;20.0;100.0;20.0</additional_attributes>
+r1=:80
+</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>360</x>
-      <y>160</y>
+      <y>220</y>
       <w>180</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;listen&gt;&gt;
-name=app1
+app
+10.42.0.11
+app.example.com
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>220</y>
-      <w>160</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=:3200</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>530</x>
-      <y>190</y>
+      <y>250</y>
       <w>130</w>
-      <h>170</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;140.0;100.0;140.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
-      <y>250</y>
-      <w>160</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=:3201/healthz</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;70.0;20.0;70.0;60.0;80.0;70.0;100.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -104,39 +73,16 @@ r1=:3201/healthz</panel_attributes>
       <x>530</x>
       <y>250</y>
       <w>130</w>
-      <h>170</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;150.0;80.0;20.0;100.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>190</y>
-      <w>130</w>
-      <h>200</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;170.0;100.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>180</x>
-      <y>380</y>
-      <w>200</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=10.42.0.12:80</panel_attributes>
-    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;70.0;20.0;70.0;90.0;80.0;100.0;100.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>160</y>
+      <y>150</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -148,7 +94,7 @@ r1=:3100</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>190</y>
+      <y>180</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -160,66 +106,43 @@ r1=:3101/healthz</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>780</x>
-      <y>300</y>
+      <y>290</y>
       <w>250</w>
-      <h>130</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
-name=web2
-ip_address=10.42.0.22</panel_attributes>
+web2
+10.42.0.22
+app.example.com</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>160</y>
-      <w>110</w>
-      <h>60</h>
+      <x>530</x>
+      <y>150</y>
+      <w>130</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;40.0;50.0;40.0;80.0;20.0</additional_attributes>
+    <additional_attributes>10.0;110.0;60.0;110.0;70.0;100.0;70.0;30.0;80.0;20.0;100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>190</y>
+      <y>180</y>
       <w>130</w>
-      <h>50</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0;100.0;20.0</additional_attributes>
+    <additional_attributes>10.0;80.0;60.0;80.0;70.0;70.0;70.0;30.0;80.0;20.0;100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>370</y>
-      <w>160</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=:3200</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
-      <y>400</y>
-      <w>160</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=:3201/healthz</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
-      <y>310</y>
+      <y>300</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -231,47 +154,12 @@ r1=:3100</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>640</x>
-      <y>340</y>
+      <y>330</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
 r1=:3101/healthz</panel_attributes>
     <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>360</x>
-      <y>360</y>
-      <w>180</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;listen&gt;&gt;
-name=app2
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>370</y>
-      <w>130</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;30.0;70.0;30.0;100.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>390</y>
-      <w>130</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0;100.0;30.0</additional_attributes>
   </element>
 </diagram>

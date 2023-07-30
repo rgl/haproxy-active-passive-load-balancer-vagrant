@@ -12,8 +12,7 @@ Add the following entries to your `/etc/hosts` file:
 
 ```
 10.42.0.10 lb.example.com
-10.42.0.11 app1.example.com
-10.42.0.12 app2.example.com
+10.42.0.11 app.example.com
 ```
 
 Run `vagrant up --provider=libvirt` to launch everything.
