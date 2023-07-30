@@ -6,7 +6,7 @@ Each node has the following components and connections:
 
 # Usage
 
-Build and install the [Ubuntu 18.04 Base Box](https://github.com/rgl/ubuntu-vagrant).
+Build and install the [Ubuntu 22.04 Base Box](https://github.com/rgl/ubuntu-vagrant).
 
 Add the following entries to your `/etc/hosts` file:
 

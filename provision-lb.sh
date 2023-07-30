@@ -24,6 +24,8 @@ EOF
 # see https://www.haproxy.com/blog/emulating-activepassing-application-clustering-with-haproxy/
 apt-get install -y haproxy
 haproxy -vv
+# see https://ssl-config.mozilla.org/ffdhe2048.txt
+install -m 444 /vagrant/ffdhe2048.txt /etc/haproxy/ffdhe2048.txt
 cp /etc/haproxy/haproxy.cfg{,.ubuntu}
 cat >/etc/haproxy/haproxy.cfg <<'EOF'
 global
@@ -45,8 +47,15 @@ global
   #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
   # An alternative list with additional directives can be obtained from
   #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
-  ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
-  ssl-default-bind-options no-sslv3
+  # generated 2023-07-27, Mozilla Guideline v5.7, HAProxy 2.4, OpenSSL 3.0.2, intermediate configuration, no HSTS
+  # https://ssl-config.mozilla.org/#server=haproxy&version=2.4&config=intermediate&openssl=3.0.2&hsts=false&guideline=5.7
+  ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305
+  ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+  ssl-default-bind-options prefer-client-ciphers no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
+  ssl-default-server-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305
+  ssl-default-server-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+  ssl-default-server-options no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
+  ssl-dh-param-file /etc/haproxy/ffdhe2048.txt
 
 defaults
   log     global
@@ -80,17 +89,23 @@ listen app1
   bind 10.42.0.11:80 name app1
   stick-table type ip size 1 nopurge
   stick on dst
-  option httpchk GET /healthz HTTP/1.1\r\nHost:app1.example.com
-  server web1 10.42.0.21:3100 check port 3101 inter 5s
-  server web2 10.42.0.22:3100 check port 3101 inter 5s backup
+  option httpchk
+  http-check connect port 3101
+  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app1.example.com
+  http-check expect status 200
+  server web1 10.42.0.21:3100 check inter 5s
+  server web2 10.42.0.22:3100 check inter 5s backup
 
 listen app2
   bind 10.42.0.12:80 name app2
   stick-table type ip size 1 nopurge
   stick on dst
-  option httpchk GET /healthz HTTP/1.1\r\nHost:app2.example.com
-  server web1 10.42.0.21:3200 check port 3201 inter 5s
-  server web2 10.42.0.22:3200 check port 3201 inter 5s backup
+  option httpchk
+  http-check connect port 3201
+  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app2.example.com
+  http-check expect status 200
+  server web1 10.42.0.21:3200 check inter 5s
+  server web2 10.42.0.22:3200 check inter 5s backup
 EOF
 systemctl restart haproxy
 

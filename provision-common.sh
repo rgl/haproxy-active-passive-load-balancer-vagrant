@@ -60,7 +60,7 @@ apt-get install -y --no-install-recommends wireshark-common
 # install node LTS for our example applications.
 # see https://github.com/nodesource/distributions#debinstall
 apt-get install -y curl gnupg
-curl -sL https://deb.nodesource.com/setup_10.x | bash
+curl -sL https://deb.nodesource.com/setup_18.x | bash
 apt-get install -y nodejs
 node --version
 npm --version

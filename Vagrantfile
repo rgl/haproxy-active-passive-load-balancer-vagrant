@@ -3,14 +3,14 @@
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu-18.04-amd64'
+  config.vm.box = 'ubuntu-22.04-amd64'
   config.vm.provider :libvirt do |lv, config|
-    lv.memory = 256
+    lv.memory = 1024
     lv.cpus = 4
     lv.cpu_mode = 'host-passthrough'
     #lv.nested = true
     lv.keymap = 'pt'
-    config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+    config.vm.synced_folder '.', '/vagrant', type: 'nfs', nfs_version: '4.2', nfs_udp: false
   end
   config.vm.define 'lb' do |config|
     config.vm.hostname = 'lb.example.com'

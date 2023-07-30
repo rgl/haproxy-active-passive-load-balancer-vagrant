@@ -30,8 +30,7 @@ adduser \
 install -d -o root -g app -m 750 /opt/app
 
 # install the example application and run it as a systemd service.
-cp /vagrant/app/* /opt/app
-(cd /opt/app && npm install)
+install /vagrant/app/* /opt/app
 
 # launch two apps: app1 (port 3100 and 3101) and app2 (port 3200 and 3201).
 for n in 1 2; do
