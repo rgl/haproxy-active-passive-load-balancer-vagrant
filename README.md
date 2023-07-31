@@ -31,4 +31,4 @@ Or access the [statists web page](http://10.42.0.10:9000).
 
  * [Emulating Active/Passing Application Clustering with HAProxy](https://www.haproxy.com/blog/emulating-activepassing-application-clustering-with-haproxy/)
  * [HAProxy Documentation](http://www.haproxy.org/#docs)
- * [HAProxy 1.8 Configuration Reference](http://cbonte.github.io/haproxy-dconv/1.8/configuration.html)
+ * [HAProxy 2.4 Configuration Reference](https://docs.haproxy.org/2.4/configuration.html)

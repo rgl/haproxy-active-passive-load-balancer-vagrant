@@ -64,3 +64,7 @@ curl -sL https://deb.nodesource.com/setup_18.x | bash
 apt-get install -y nodejs
 node --version
 npm --version
+
+# trust the example-ca.
+install /vagrant/shared/example-ca/example-ca-crt.pem /usr/local/share/ca-certificates/example-ca.crt
+update-ca-certificates -v

@@ -7,7 +7,7 @@
       <x>340</x>
       <y>140</y>
       <w>220</w>
-      <h>240</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
 &lt;&lt;haproxy&gt;&gt;
@@ -20,26 +20,26 @@
       <x>780</x>
       <y>140</y>
       <w>250</w>
-      <h>90</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
-web1
-10.42.0.21
+web1 .. web2
+10.42.0.21 .. .22
 app.example.com</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
-      <y>240</y>
-      <w>120</w>
+      <x>240</x>
+      <y>230</y>
+      <w>140</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
-r1=:80
+r1=tcp:80
 </panel_attributes>
-    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -59,107 +59,121 @@ app.example.com
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>250</y>
-      <w>130</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0;70.0;20.0;70.0;60.0;80.0;70.0;100.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>250</y>
-      <w>130</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0;70.0;20.0;70.0;90.0;80.0;100.0;100.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
-      <y>150</y>
-      <w>160</w>
+      <x>610</x>
+      <y>230</y>
+      <w>190</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
-r1=:3100</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+r1=http:3100</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>180</y>
-      <w>160</w>
+      <x>610</x>
+      <y>260</y>
+      <w>190</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
-r1=:3101/healthz</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+r1=http:3101/healthz</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>330</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>360</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>360</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+r1=https:4101/healthz</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>330</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+r1=https:4100</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>780</x>
-      <y>290</y>
-      <w>250</w>
-      <h>90</h>
+      <x>360</x>
+      <y>320</y>
+      <w>180</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
-web2
-10.42.0.22
-app.example.com</panel_attributes>
+    <panel_attributes>&lt;&lt;listen&gt;&gt;
+app
+10.42.0.11
+app.example.com
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>150</y>
-      <w>130</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;110.0;60.0;110.0;70.0;100.0;70.0;30.0;80.0;20.0;100.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>530</x>
-      <y>180</y>
-      <w>130</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=-(</panel_attributes>
-    <additional_attributes>10.0;80.0;60.0;80.0;70.0;70.0;70.0;30.0;80.0;20.0;100.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
-      <y>300</y>
-      <w>160</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-
-r1=:3100</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>640</x>
+      <x>240</x>
       <y>330</y>
-      <w>160</w>
+      <w>140</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=()-
-r1=:3101/healthz</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+r1=tcp:443
+</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>260</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>230</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
   </element>
 </diagram>

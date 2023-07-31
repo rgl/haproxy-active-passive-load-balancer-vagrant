@@ -93,8 +93,23 @@ listen app
   http-check connect port 3101
   http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app.example.com
   http-check expect status 200
-  server web1 10.42.0.21:3100 check inter 5s
-  server web2 10.42.0.22:3100 check inter 5s backup
+  default-server check
+  default-server inter 5s
+  server web1 10.42.0.21:3100
+  server web2 10.42.0.22:3100 backup
+
+listen app_tls
+  bind 10.42.0.11:443 name app
+  stick-table type ip size 1 nopurge
+  stick on dst
+  option httpchk
+  http-check connect port 4101 ssl sni app.example.com
+  http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app.example.com
+  http-check expect status 200
+  default-server check ssl ca-file /usr/local/share/ca-certificates/example-ca.crt
+  default-server inter 5s
+  server web1 10.42.0.21:4100
+  server web2 10.42.0.22:4100 backup
 EOF
 systemctl restart haproxy
 
