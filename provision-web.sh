@@ -74,6 +74,8 @@ curl \
     --no-progress-meter \
     --fail \
     --output - \
+    --cert /vagrant/shared/example-ca/$fqdn-client-crt.pem \
+    --key /vagrant/shared/example-ca/$fqdn-client-key.pem \
     --resolve $fqdn:4100:127.0.0.1 \
     https://$fqdn:4100/try
 
@@ -84,14 +86,18 @@ curl \
     --no-progress-meter \
     --fail \
     --output - \
+    --cert /vagrant/shared/example-ca/$fqdn-client-crt.pem \
+    --key /vagrant/shared/example-ca/$fqdn-client-key.pem \
     --resolve $fqdn:4100:127.0.0.1 \
     https://$fqdn:4100/try
 unset CURL_CA_BUNDLE
 
 # see the tls certificate validation result.
 # NB should have verify return:1.
-echo | openssl \
+(printf "GET /try HTTP/1.1\r\nHost: $fqdn\r\n\r\n" && sleep .2) | openssl \
     s_client \
     -connect 127.0.0.1:4100 \
     -servername $fqdn \
-    -CAfile /usr/local/share/ca-certificates/example-ca.crt
+    -CAfile /usr/local/share/ca-certificates/example-ca.crt \
+    -cert /vagrant/shared/example-ca/$fqdn-client-crt.pem \
+    -key /vagrant/shared/example-ca/$fqdn-client-key.pem

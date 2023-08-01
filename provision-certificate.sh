@@ -73,3 +73,37 @@ if [ ! -f $domain-crt.pem ]; then
     #openssl x509 -noout -text -in $domain-crt.pem
     #openssl pkcs12 -info -nodes -passin pass: -in $domain-key.p12
 fi
+
+if [ ! -f $domain-client-crt.pem ]; then
+    openssl genrsa \
+        -out $domain-client-key.pem \
+        2048 \
+        2>/dev/null
+    chmod 400 $domain-client-key.pem
+    openssl req -new \
+        -sha256 \
+        -subj "/CN=$domain-client" \
+        -key $domain-client-key.pem \
+        -out $domain-client-csr.pem
+    openssl x509 -req -sha256 \
+        -CA $ca_file_name-crt.pem \
+        -CAkey $ca_file_name-key.pem \
+        -CAcreateserial \
+        -extensions a \
+        -extfile <(echo "[a]
+            extendedKeyUsage=critical,clientAuth
+            ") \
+        -days 365 \
+        -in  $domain-client-csr.pem \
+        -out $domain-client-crt.pem
+    openssl pkcs12 -export \
+        -keyex \
+        -inkey $domain-client-key.pem \
+        -in $domain-client-crt.pem \
+        -certfile $domain-client-crt.pem \
+        -passout pass: \
+        -out $domain-client-key.p12
+    # dump the certificate contents (for logging purposes).
+    #openssl x509 -noout -text -in $domain-client-crt.pem
+    #openssl pkcs12 -info -nodes -passin pass: -in $domain-client-key.p12
+fi

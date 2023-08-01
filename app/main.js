@@ -40,8 +40,8 @@ const httpsOptions = {
     cert: fs.readFileSync(`${fqdn}-crt.pem`),
     // set the client certificate requirements.
     ca: fs.readFileSync('example-ca-crt.pem'),
-    requestCert: false,
-    rejectUnauthorized: false,
+    requestCert: true,
+    rejectUnauthorized: true,
 }
 main(http, {}, metadata, process.argv[3], process.argv[4]);
 main(https, httpsOptions, metadata, process.argv[5], process.argv[6]);

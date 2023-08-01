@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eux
 
+fqdn="$(hostname --fqdn)"
+
 # configure apt for non-interactive mode.
 export DEBIAN_FRONTEND=noninteractive
 
@@ -26,8 +28,10 @@ apt-get install -y haproxy
 haproxy -vv
 # see https://ssl-config.mozilla.org/ffdhe2048.txt
 install -m 444 /vagrant/ffdhe2048.txt /etc/haproxy/ffdhe2048.txt
+install -g haproxy -m 440 "/vagrant/shared/example-ca/$fqdn-client-key.pem" "/etc/haproxy/$fqdn-client-crt-and-key.pem"
+cat "/vagrant/shared/example-ca/$fqdn-client-crt.pem" >>"/etc/haproxy/$fqdn-client-crt-and-key.pem"
 cp /etc/haproxy/haproxy.cfg{,.ubuntu}
-cat >/etc/haproxy/haproxy.cfg <<'EOF'
+cat >/etc/haproxy/haproxy.cfg <<EOF
 global
   log /dev/log    local0
   log /dev/log    local1 notice
@@ -106,7 +110,9 @@ listen app_tls
   http-check connect port 4101 ssl sni app.example.com
   http-check send meth GET uri /healthz ver HTTP/1.1 hdr Host app.example.com
   http-check expect status 200
-  default-server check ssl ca-file /usr/local/share/ca-certificates/example-ca.crt
+  default-server check check-ssl
+  default-server ca-file /usr/local/share/ca-certificates/example-ca.crt
+  default-server crt /etc/haproxy/$fqdn-client-crt-and-key.pem
   default-server inter 5s
   server web1 10.42.0.21:4100
   server web2 10.42.0.22:4100 backup
