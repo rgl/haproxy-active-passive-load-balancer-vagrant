@@ -23,9 +23,10 @@
       <h>280</h>
     </coordinates>
     <panel_attributes>&lt;&lt;virtual_machine&gt;&gt;
-web1 .. web2
-10.42.0.21 .. .22
-app.example.com</panel_attributes>
+webN
+10.42.0.2N
+app.example.com
+transparency=0</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -175,5 +176,16 @@ r1=tcp:443
     </coordinates>
     <panel_attributes>lt=-(</panel_attributes>
     <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>150</y>
+      <w>250</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
   </element>
 </diagram>
